@@ -1,0 +1,9 @@
+{
+    "replace": true,
+    "values": [
+        "#leaves",
+        "magenta_terracotta",
+        "pink_glazed_terracotta",
+        "pearlescent_froglight"
+    ]
+}

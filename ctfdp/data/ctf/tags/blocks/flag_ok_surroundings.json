@@ -1,0 +1,17 @@
+{
+    "replace": true,
+    "values": [
+        "air",
+        "cave_air",
+        "void_air",
+        "grass",
+        "tall_grass",
+        "#flowers",
+        "snow",
+        "dead_bush",
+        "stone_button",
+        "pink_petals",
+        "moss_carpet",
+        "moving_piston"
+    ]
+}

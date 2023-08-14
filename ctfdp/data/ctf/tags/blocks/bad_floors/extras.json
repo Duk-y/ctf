@@ -1,0 +1,8 @@
+{
+    "replace": true,
+    "values": [
+        "bamboo_block",
+        "bedrock",
+        "#slabs"
+    ]
+}

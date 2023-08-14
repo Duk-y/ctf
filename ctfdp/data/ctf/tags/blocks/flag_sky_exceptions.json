@@ -1,0 +1,27 @@
+{
+    "replace": true,
+    "values": [
+        "#leaves",
+        "dark_oak_log",
+        "blue_ice",
+        "packed_ice",
+        "magenta_terracotta",
+        "pink_glazed_terracotta",
+        "pearlescent_froglight",
+        "lantern",
+        "chain",
+        "cherry_wood",
+        "cherry_log",
+        "spruce_wood",
+        "spruce_log",
+        "mangrove_wood",
+        "snow",
+        "#slabs",
+        "barrier",
+        "cave_air",
+        "air",
+        "void_air",
+        "moving_piston",
+        "#ctf:flag_ok_surroundings"
+    ]
+}

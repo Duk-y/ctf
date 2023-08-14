@@ -1,0 +1,34 @@
+{
+    "pools": [
+      {
+        "rolls": 1,
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "minecraft:carrot_on_a_stick",
+            "functions": [
+              {
+                "function": "minecraft:set_name",
+                "entity": "this",
+                "name": {
+                  "text": "Right-Click",
+                  "color": "#2994FF",
+                  "bold": true,
+                  "italic": false,
+                  "extra": [
+                    {
+                      "text": " to hide the flag!",
+                      "color": "#80C8FF",
+                      "bold": false,
+                      "italic": false
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+  

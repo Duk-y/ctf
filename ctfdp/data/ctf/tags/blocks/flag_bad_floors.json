@@ -1,0 +1,16 @@
+{
+    "replace": true,
+    "values": [
+        "#leaves",
+        "magenta_terracotta",
+        "pink_glazed_terracotta",
+        "pearlescent_froglight",
+        "bamboo_block",
+        "water",
+        "lava",
+        "bedrock",
+        "#slabs",
+        "chain",
+        "#trapdoors"
+    ]
+}

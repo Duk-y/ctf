@@ -1,0 +1,55 @@
+{
+    "condition": "minecraft:any_of",
+    "terms": [
+        {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+                "team": "cherry",
+                "location": {
+                    "biome": "minecraft:cherry_grove"
+                }
+            }
+        },
+        {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+                "team": "desert",
+                "location": {
+                    "biome": "minecraft:desert"
+                }
+            }
+        },
+        {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+                "team": "ice",
+                "location": {
+                    "biome": "minecraft:ice_spikes"
+                }
+            }
+        },
+        {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+                "team": "forest",
+                "location": {
+                    "biome": "minecraft:dark_forest"
+                }
+            }
+        },
+        {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+                "team": "mesa",
+                "location": {
+                    "biome": "minecraft:badlands"
+                }
+            }
+        }
+    ]
+}

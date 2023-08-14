@@ -1,0 +1,34 @@
+LIST OF THINGS TO CHANGE WHEN WORLD IS COPIED BACK!!!
+THOROUGHLY PLAYTEST TO ENSURE THERE AREN'T ANY ISSUES:
+- Players can't pick up a flag when they are
+    a) in their own territory
+    b) currently holding a flag
+    (this was an issue at one point; i tried to fix it, couldn't find any issues, went back to examine further and found that it was no longer an issue.
+    this makes me believe that it may happen again since i never found the cause; but maybe i changed something that fixed it permanently without realizing it.)
+
+ISSUES
+- Look into why "cherry", "desert", "ice", "mesa" and "forest" appear a slightly different number of times as one another
+
+- If there is a player on the team where a flag is hidden that is CLOSER to the flag than another player on the enemy team, but both are within range to pick it up, the
+  enemy team player will attempt to pick up the flag, but since the player in their own biome is closer, it'll go to them instead.
+    * example: flag hidden in mesa biome. mesa player standing 0.1 blocks away from the flag. cherry player standing 0.3 blocks away from the flag. cherry player picks up the
+               flag, triggering the flag carrying sequence. because the mesa player is CLOSER than the cherry player, they get the flag instead of the cherry player.
+    * this is a minor edgecase so i'll fix it with low priority 
+    //I think this one might be fixed, but check line 77-78 just in case so I didn't break anything
+
+- Sometimes when placing the flag, the countdown doesn't stop //probably fixed
+- Team leader should spawn in a slightly different spot so that when the flag item is summoned on them, they are definitely going to pick it up rather than someone else //fixed, I think?? Even if they shouldn't be able to pick it up, they can... at the start a least
+- Flag glows instead of players on intro sequence //fixed
+- Everyone is sometimes given a warped fungus on a stick, not just the leader [might be fixed, pls check //tbh looking at the code I don't see how this could happen]
+- Creative players can pick up flag //fixed
+- Flags disappearing randomly
+- Forest jail doesn't have lava //added
+- Sidebar doesnt update properly //most likely fixed, the update function was missing for forest
+- Team Indication (add dyed leather boots and leggings depending on what team people are on; ideally dyed the same color as the storage minecraft:colors) //added
+
+TODOS
+- Flags
+    * Fix flag holders losing contact with flags on logout; make flags just drop right there on logout //I added something that I think works, but can't really test it in single player due to the datapack reloading
+- Win condition; add:
+    * Most flags owned by any team after 1 hour
+
