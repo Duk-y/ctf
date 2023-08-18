@@ -79,7 +79,7 @@ effect give @a saturation infinite 100 true
 effect give @a water_breathing infinite 100 true
 
 
-execute as @e[tag=jail.center] at @s run function ctf:jail/summon_assets
+execute as @e[tag=jail.center] at @s run function ctf:jail/jailbreak/jailbreak_end
 scoreboard players set $jail.particle_emitter.timer var 0
 
 scoreboard players set $jail.break.mesa.timer var 0
