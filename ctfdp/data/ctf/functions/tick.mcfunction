@@ -5,7 +5,7 @@ scoreboard players set @a fungus_click 0
 execute if score $start_game var matches 1.. run function ctf:begin_game_timer
 
 # JAIL STUFF
-#execute as @e[tag=jail.center,tag=!jailbroken] at @s run function ctf:jail/particles/main
+execute as @e[tag=jail.center,tag=!jailbroken] at @s run function ctf:jail/particles/main
 scoreboard players add $jail.particle_emitter.timer var 1
 execute if score $jail.particle_emitter.timer var matches 4 run scoreboard players set $jail.particle_emitter.timer var 0
 
