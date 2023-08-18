@@ -1,4 +1,5 @@
-scoreboard players set @s valid_tag 0
+scoreboard players set $valid_tag var 0
+
 execute at @s run playsound entity.enderman.teleport master @s ~ ~ ~ 1 0
 scoreboard players operation @s tag_cooldown_display = @s tag_cooldown
 scoreboard players operation @s tag_cooldown_display /= 20 const

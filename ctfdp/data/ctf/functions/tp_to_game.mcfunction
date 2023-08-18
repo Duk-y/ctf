@@ -1,12 +1,12 @@
 title @a title {"text":"1 MINUTE","bold":true,"color":"gold"}
 title @a subtitle "to hide your flag! Strategize with your team leader!"
 
-tp @a[team=mesa] @e[tag=spawnpoint.mesa, limit=1]
-tp @a[team=cherry] @e[tag=spawnpoint.cherry, limit=1]
-tp @a[team=desert] @e[tag=spawnpoint.desert, limit=1]
-tp @a[team=ice] @e[tag=spawnpoint.ice, limit=1]
-tp @a[team=forest] @e[tag=spawnpoint.forest, limit=1]
-execute as @a[tag=t_leader] at @s rotated as @s run tp @s ^ ^ ^2
+tp @a[team=mesa] -81.50 32.00 -60.50 0.00 0.00
+tp @a[team=cherry] 89.50 32.00 -168.50 0.00 0.00
+tp @a[team=desert] 131.50 29.00 -20.50 0.00 0.00
+tp @a[team=ice] 102.50 44.00 159.50 0.00 0.00
+tp @a[team=forest] -115.50 15.00 57.50 0.00 0.00
+execute as @a[tag=t_leader] at @s rotated ~ 0 run tp @s ^ ^ ^2
 # Gives team leaders time to pick up flags at game start
 scoreboard players set $game_started_timer var 10
 clear @a warped_fungus_on_a_stick

@@ -41,7 +41,6 @@ scoreboard players set ‌ flags 0
 scoreboard objectives add var dummy
 scoreboard objectives add const dummy
 scoreboard objectives add flags dummy ""
-scoreboard objectives add pafisb dummy
 scoreboard objectives add invincibility_display dummy
 scoreboard objectives add valid_tag dummy
 scoreboard objectives add captured dummy
@@ -55,6 +54,10 @@ scoreboard objectives add place_timer dummy
 scoreboard objectives add carrot_click used:carrot_on_a_stick
 scoreboard objectives add fungus_click used:warped_fungus_on_a_stick
 scoreboard objectives add leave_game minecraft.custom:minecraft.leave_game
+
+scoreboard players set 2 const 2
+scoreboard players set 20 const 20
+scoreboard players set 200 const 200
 
 scoreboard players set @a has_flag_placer 0
 scoreboard players set @a carrot_click 0

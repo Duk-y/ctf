@@ -12,6 +12,6 @@
       }
     },
     "rewards": {
-      "function": "ctf:get_tagged"
+      "function": "ctf:tagging/get_hit_by_player"
     }
 }

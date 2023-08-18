@@ -1,7 +1,6 @@
 tag @s remove carrying
-tag @s add self_flagplace
-execute at @e[tag=self_flagplace] as @e[tag=flag_mount, sort=nearest, limit=1] on passengers run kill @s
-execute at @e[tag=self_flagplace] run kill @e[tag=flag_mount, sort=nearest, limit=1]
+execute at @s as @e[type=armor_stand, tag=flag_mount, distance=..5, limit=1] on passengers run kill @s
+execute at @s run kill @e[type=armor_stand, tag=flag_mount, distance=..5, limit=1]
 function ctf:flag/remove_placer_item
 scoreboard players reset @s place_timer
 
@@ -22,4 +21,3 @@ execute if entity @s[tag=carrying_cherry] run function ctf:flag/place/cherry_r
 execute if entity @s[tag=carrying_desert] run function ctf:flag/place/desert_r
 execute if entity @s[tag=carrying_ice] run function ctf:flag/place/ice_r
 execute if entity @s[tag=carrying_forest] run function ctf:flag/place/forest_r
-tag @e remove self_flagplace

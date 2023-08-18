@@ -10,6 +10,6 @@
       }
     },
     "rewards": {
-      "function": "ctf:tag"
+      "function": "ctf:tagging/hit_player"
     }
 }

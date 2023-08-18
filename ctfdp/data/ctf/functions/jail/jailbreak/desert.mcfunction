@@ -1,6 +1,6 @@
 fill ~4 ~2 ~4 ~-5 ~ ~-5 air replace iron_trapdoor
 scoreboard players set $jail.break.desert.timer var 200
-tag @e[tag=jail.center, tag=desert] add jailbroken
+tag @e[tag=jail.center, tag=desert, limit=1] add jailbroken
 execute as @a at @s run playsound block.glass.break block @s ~ ~ ~ 10 0 
 scoreboard players set $jail.break.cooldown.desert var 1200
 scoreboard players add @a[distance=..8, tag=in_jail] invincibility 200

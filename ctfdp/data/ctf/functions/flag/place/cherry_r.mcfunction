@@ -2,10 +2,7 @@ function ctf:flag/place/cherry
 
 # when the player runs out of time to place the flag, this function is run AS them but AT the nearest acceptable flag location
 # to account for this, we can't take the player's position as it won't necessarily be where the flag is, but instead we summon a marker here and take its position
-summon marker ~ ~ ~ {Tags:["locator"]}
-execute store result score cherry placed_flag.x run data get entity @e[tag=locator, distance=..0.0001, limit=1] Pos[0]
-execute store result score cherry placed_flag.z run data get entity @e[tag=locator, distance=..0.0001, limit=1] Pos[2]
-kill @e[tag=locator]
+function ctf:flag/place/get_coordinates/main
 
 execute if entity @s[team=mesa] run tellraw @a ["\n",[{"nbt":"mesa","storage":"colors","interpret":true},"MESA"], [{"text": " has CAPTURED the ", "color": "white"}], [{"nbt":"cherry","storage":"colors","interpret":true},"CHERRY"], [{"text":" flag!\n", "color": "white"}]]
 execute if entity @s[team=cherry] run tellraw @a ["\n",[{"nbt":"cherry","storage":"colors","interpret":true},"CHERRY"], [{"text": " has CAPTURED the ", "color": "white"}], [{"nbt":"cherry","storage":"colors","interpret":true},"CHERRY"], [{"text":" flag!\n", "color": "white"}]]
