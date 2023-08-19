@@ -1,4 +1,5 @@
 tag @a remove player
+gamemode adventure @a[gamemode=survival]
 tag @a[gamemode=adventure] add player
 team leave @a[tag=!player]
 
