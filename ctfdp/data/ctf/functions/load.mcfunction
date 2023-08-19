@@ -67,7 +67,7 @@ scoreboard players set @a place_timer 0
 scoreboard players set $game_over var 0
 scoreboard players set $started_win_countdown var 0
 scoreboard players set $tp_timer var 0
-bossbar add win_timer [{"text":"Game Over ","bold":true,"color":"red"},{"text":"in:","color":"white","bold":false}]
+bossbar add win_timer ["",{"text":"Game Over","bold":true,"color":"dark_red"}," in:"]
 bossbar set win_timer color red
 bossbar set win_timer visible false
 
