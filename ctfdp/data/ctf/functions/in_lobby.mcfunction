@@ -14,7 +14,8 @@ execute store result score $forest_players var if entity @a[team=forest]
 
 title @a[tag=player] actionbar [{"text": "Stand in your ","bold":false},{"text": "OWN BIOME","color": "gold","bold": true},{"text": " to select your team!","bold": false,"color": "white"}]
 execute if score $lobby_loop var matches 1 run tellraw @a [{"text":"\nPlayers Online: ["},{"score":{"name":"$players_on","objective":"var"},"color":"#FF7F81"},{"text":"/"},{"text":"100","color":"red"},{"text":"]\nMesa: ["},{"score":{"name":"$mesa_players","objective":"var"},"color":"#EAC677"},{"text":"/"},{"text":"20","color":"gold"},{"text":"]","color":"white"},{"text":"\nCherry: ["},{"score":{"name":"$cherry_players","objective":"var"},"color":"#FF96DD"},{"text":"/"},{"text":"20","color":"#F75CE1"},{"text":"]\nDesert: ["},{"score":{"name":"$desert_players","objective":"var"},"color":"#FDFDA7"},{"text":"/"},{"text":"20","color":"yellow"},{"text":"]\nIce: ["},{"score":{"name":"$ice_players","objective":"var"},"color":"#9DFFFF"},{"text":"/"},{"text":"20","color":"aqua"},{"text":"]\nForest: ["},{"score":{"name":"$forest_players","objective":"var"},"color":"#5ECC5E"},{"text":"/"},{"text":"20","color":"dark_green"},{"text":"]\n"}]
-execute as @a[tag=player] at @s run function ctf:lobby/join_team
+execute as @a[tag=player, tag=!lobby.checked_biome, limit=5] at @s run function ctf:lobby/join_team
+execute unless entity @a[tag=player, tag=!lobby.checked_biome, limit=1] run tag @a remove lobby.checked_biome
 
 title @a[tag=player,team=mesa] actionbar ["Stand in your ",{"text": "OWN BIOME","color": "gold","bold": true}," to select your team!",{"text":" | ","color":"gray"},[{"nbt":"mesa","storage":"colors","interpret":true},"MESA"]]
 title @a[tag=player,team=cherry] actionbar ["Stand in your ",{"text": "OWN BIOME","color": "gold","bold": true}," to select your team!",{"text":" | ","color":"gray"},[{"nbt":"cherry","storage":"colors","interpret":true},"CHERRY"]]

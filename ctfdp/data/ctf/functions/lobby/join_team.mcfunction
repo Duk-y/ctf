@@ -1,3 +1,4 @@
+tag @s add lobby.checked_biome
 execute if block ~ 100 ~ orange_wool run team join mesa @s
 execute if block ~ 100 ~ pink_wool run team join cherry @s
 execute if block ~ 100 ~ yellow_wool run team join desert @s
