@@ -38,8 +38,10 @@ execute if score $jail.break.forest.timer var matches 1 as @e[tag=jail.center, t
 
 execute as @a[tag=invincible] at @s run function ctf:invincibility/tick_invincible_player
 
+tag @a[tag=in_jail] add return_to_jail
 tag @a remove in_jail
 execute at @e[type=marker, tag=jail.center, tag=!jailbroken, limit=5] positioned ~-4 ~ ~-4 as @a[tag=player, gamemode=!spectator, gamemode=!creative, dx=7, dy=3, dz=7] positioned ~4 ~ ~4 run function ctf:jail/jail_verify
+execute as @a[tag=return_to_jail] at @s run function ctf:jail/prevent_jail_cheesing
 
 # if there's a player close to the jail, run some jailbreak conditions to check if it's a valid jailbreak
 execute as @e[tag=jail.center, tag=!jailbroken] at @s run function ctf:jail/tick_jail_center_non_jailbroken

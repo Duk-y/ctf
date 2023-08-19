@@ -1,5 +1,6 @@
 execute as @a at @s run playsound block.glass.break block @s ~ ~ ~ 10 0 
 execute as @a[distance=..8, tag=in_jail] run function ctf:invincibility/start_invincibility
+tag @a[distance=..8, tag=in_jail] remove in_jail
 
 fill ~-5 ~ ~-5 ~4 ~2 ~4 air replace iron_trapdoor
 
