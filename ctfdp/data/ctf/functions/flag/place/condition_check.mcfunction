@@ -98,7 +98,7 @@ execute if block ~1 ~-1 ~-1 #ctf:bad_floors/liquid run return 7
 execute if block ~1 ~-1 ~ #ctf:bad_floors/liquid run return 7
 execute if block ~1 ~-1 ~1 #ctf:bad_floors/liquid run return 7
 
-execute if entity @e[tag=flag, tag=!carried, distance=..25] run return 8
+execute if entity @e[type=item, tag=flag, tag=!carried, distance=..25] run return 8
 
 execute if block ~-1 ~-1 ~-1 #ctf:bad_floors/extras run return 9
 execute if block ~-1 ~-1 ~ #ctf:bad_floors/extras run return 9

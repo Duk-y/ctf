@@ -5,10 +5,6 @@ scoreboard players set @a fungus_click 0
 execute if score $start_game var matches 1.. run function ctf:begin_game_timer
 
 # JAIL STUFF
-execute as @e[tag=jail.center,tag=!jailbroken] at @s run function ctf:jail/particles/main
-scoreboard players add $jail.particle_emitter.timer var 1
-execute if score $jail.particle_emitter.timer var matches 4 run scoreboard players set $jail.particle_emitter.timer var 0
-
 scoreboard players remove @a[scores={tag_cooldown=1..}] tag_cooldown 1
 
 # cooldown.x measures the time between jailbreaks to ensure that two jailbreaks can't happen sequentially (1 minute; 1200 ticks)
@@ -40,10 +36,10 @@ execute if score $jail.break.desert.timer var matches 1 as @e[tag=jail.center, t
 execute if score $jail.break.ice.timer var matches 1 as @e[tag=jail.center, tag=ice] at @s run function ctf:jail/jailbreak/jailbreak_end
 execute if score $jail.break.forest.timer var matches 1 as @e[tag=jail.center, tag=forest] at @s run function ctf:jail/jailbreak/jailbreak_end
 
-execute as @a[scores={invincibility=1..}] at @s run function ctf:invincible
+execute as @a[tag=invincible] at @s run function ctf:invincibility/tick_invincible_player
 
 tag @a remove in_jail
-execute as @a[tag=player] at @s if block ~ -64 ~ #wool run function ctf:jail/jail_verify
+execute at @e[type=marker, tag=jail.center, tag=!jailbroken, limit=5] positioned ~-4 ~ ~-4 as @a[tag=player, gamemode=!spectator, gamemode=!creative, dx=7, dy=3, dz=7] positioned ~4 ~ ~4 run function ctf:jail/jail_verify
 
 # if there's a player close to the jail, run some jailbreak conditions to check if it's a valid jailbreak
 execute as @e[tag=jail.center, tag=!jailbroken] at @s run function ctf:jail/tick_jail_center_non_jailbroken

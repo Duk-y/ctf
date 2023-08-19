@@ -78,9 +78,15 @@ clear @a leather_leggings
 effect give @a saturation infinite 100 true
 effect give @a water_breathing infinite 100 true
 
-
-execute as @e[tag=jail.center] at @s run function ctf:jail/jailbreak/jailbreak_end
-scoreboard players set $jail.particle_emitter.timer var 0
+# reset jail centers
+kill @e[type=marker,tag=jail.center]
+kill @e[type=item_display,tag=jail.forcefield]
+summon item_display -105.0 31.0 -150.0 {Tags: ["mesa", "jail.forcefield"], item: {id: "minecraft:white_stained_glass", Count: 1b, tag: {CustomModelData: 1}}, transformation: {left_rotation: [0f, 0f, 0f, 1f], translation: [0f, 0f, 0f], right_rotation: [0f, 0f, 0f, 1f], scale: [8f, 8f, 8f]}, Passengers: [{id: "minecraft:marker", Tags: ["mesa", "jail.center"]}]}
+summon item_display 116.0 33.0 -185.0 {Tags: ["cherry", "jail.forcefield"], item: {id: "minecraft:white_stained_glass", Count: 1b, tag: {CustomModelData: 2}}, transformation: {left_rotation: [0f, 0f, 0f, 1f], translation: [0f, 0f, 0f], right_rotation: [0f, 0f, 0f, 1f], scale: [8f, 8f, 8f]}, Passengers: [{id: "minecraft:marker", Tags: ["cherry", "jail.center"]}]}
+summon item_display 197.0 35.0 1.0 {Tags: ["desert", "jail.forcefield"], item: {id: "minecraft:white_stained_glass", Count: 1b, tag: {CustomModelData: 3}}, transformation: {left_rotation: [0f, 0f, 0f, 1f], translation: [0f, 0f, 0f], right_rotation: [0f, 0f, 0f, 1f], scale: [8f, 8f, 8f]}, Passengers: [{id: "minecraft:marker", Tags: ["desert", "jail.center"]}]}
+summon item_display 76.0 32.0 118.0 {Tags: ["ice", "jail.forcefield"], item: {id: "minecraft:white_stained_glass", Count: 1b, tag: {CustomModelData: 4}}, transformation: {left_rotation: [0f, 0f, 0f, 1f], translation: [0f, 0f, 0f], right_rotation: [0f, 0f, 0f, 1f], scale: [8f, 8f, 8f]}, Passengers: [{id: "minecraft:marker", Tags: ["ice", "jail.center"]}]}
+summon item_display -124.0 29.0 99.0 {Tags: ["forest", "jail.forcefield"], item: {id: "minecraft:white_stained_glass", Count: 1b, tag: {CustomModelData: 5}}, transformation: {left_rotation: [0f, 0f, 0f, 1f], translation: [0f, 0f, 0f], right_rotation: [0f, 0f, 0f, 1f], scale: [8f, 8f, 8f]}, Passengers:[{id: "minecraft:marker", Tags:["forest", "jail.center"]}]}
+execute as @e[type=marker,tag=jail.center] at @s run function ctf:jail/jailbreak/jailbreak_end
 
 scoreboard players set $jail.break.mesa.timer var 0
 scoreboard players set $jail.break.cherry.timer var 0
