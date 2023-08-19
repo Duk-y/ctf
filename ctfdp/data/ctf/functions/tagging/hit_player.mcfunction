@@ -26,6 +26,8 @@ execute if entity @s[tag=carrying] run function ctf:tagging/tag_with_flag
 execute if score @s tag_cooldown matches 1.. run function ctf:tagging/tag_on_cooldown
 
 # do more checks as the target, store biome type, and tp if successful
+scoreboard players set $tagged_while_invincible var 0
+scoreboard players set $tagged_near_flag var 0
 execute if score $valid_tag var matches 1 as @a[tag=target, limit=1] run function ctf:tagging/target/main
 
 # messages

@@ -6,11 +6,9 @@ execute if entity @s[team=ice] run data modify storage ctf:temp target set value
 execute if entity @s[team=forest] run data modify storage ctf:temp target set value '[{"nbt":"forest","storage":"colors","interpret":true},{"selector":"@a[tag=target,limit=1]"}]'
 
 # target cannot be tagged if they are invincible
-scoreboard players set $tagged_while_invincible var 0
 execute if entity @s[tag=invincible] at @s run function ctf:tagging/target/tagged_while_invincible
 
 # target cannot be tagged if they near a flag item
-scoreboard players set $tagged_near_flag var 0
 execute at @s if entity @e[type=item, tag=flag, tag=!carried, distance=..8, limit=1] run function ctf:tagging/target/tagged_near_flag
 
 # target cannot be tagged if they are on their home turf
