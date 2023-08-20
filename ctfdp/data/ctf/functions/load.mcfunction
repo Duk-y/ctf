@@ -1,3 +1,11 @@
+# forceload jails
+forceload add 196 0
+forceload add 75 117
+forceload add -125 98
+forceload add -106 -151
+forceload add 115 -186
+
+#
 kill @e[tag=jail.particle_emitter]
 kill @e[tag=flag]
 kill @e[tag=flag_mount]
