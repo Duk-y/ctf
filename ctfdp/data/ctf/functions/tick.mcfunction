@@ -1,3 +1,6 @@
+# MANAGE PLAYERS LEAVING/JOINING
+execute as @a unless score @s leave_game matches 0 run function ctf:on_player_join
+
 # LOBBY STUFF
 execute if score $in_lobby var matches 1 run function ctf:in_lobby
 execute if entity @a[scores={fungus_click=1..},limit=1] run scoreboard players set $start_game var 200
@@ -48,10 +51,6 @@ execute as @e[tag=jail.center, tag=!jailbroken] at @s run function ctf:jail/tick
 
 # FLAGS STUFF
 
-# player carrying flag leaves the game
-execute as @e[type=armor_stand, tag=flag_mount] at @s unless entity @a[tag=carrying,distance=..5,limit=1] run function ctf:flag/place/leave_game
-execute as @a[scores={leave_game=1..},tag=carrying] run function ctf:flag/remove_carrying_tags
-
 # prevent cross-biome flag pickup
 execute as @e[type=item,tag=flag, tag=!game_start_flag] at @s run function ctf:flag/tick_flag_entity
 
@@ -64,6 +63,7 @@ execute as @a[scores={picked_up.forest=1..}, tag=!carrying, tag=player] at @s ru
 
 #
 execute as @a[tag=carrying] at @s run function ctf:flag/tick_carrying_player
+execute as @e[type=armor_stand, tag=flag_mount] at @s run function ctf:flag/flag_mount/tick_flag_mount
 
 # flag timer (time to place down flag upon capturing)
 execute as @a[scores={place_timer=1..}] run function ctf:flag/place/timer

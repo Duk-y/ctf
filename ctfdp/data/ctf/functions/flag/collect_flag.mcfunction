@@ -9,6 +9,7 @@ execute if score @s picked_up.cherry matches 1.. run summon item ~ ~ ~ {Item:{id
 execute if score @s picked_up.desert matches 1.. run summon item ~ ~ ~ {Item:{id:"minecraft:yellow_candle", Count:1b}, PickupDelay:-32768, Age:-32768, Tags:["flag", "carried"]}
 execute if score @s picked_up.ice matches 1.. run summon item ~ ~ ~ {Item:{id:"minecraft:light_blue_candle", Count:1b}, PickupDelay:-32768, Age:-32768, Tags:["flag", "carried"]}
 execute if score @s picked_up.forest matches 1.. run summon item ~ ~ ~ {Item:{id:"minecraft:green_candle", Count:1b}, PickupDelay:-32768, Age:-32768, Tags:["flag", "carried"]}
+data modify entity @e[type=item, tag=flag, limit=1, distance=..0.01] Thrower set from entity @s UUID
 ride @e[type=item, tag=flag, limit=1, distance=..0.01] mount @e[type=armor_stand, tag=flag_mount, limit=1, distance=..0.01]
 
 tag @s remove carrying_mesa

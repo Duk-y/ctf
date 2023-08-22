@@ -19,7 +19,6 @@ tag @e remove carrying_ice
 tag @e remove carrying_forest
 
 clear @a carrot_on_a_stick
-title @a times 1s 3s 1s
 
 team add desert_sbd
 team add mesa_sbd
@@ -32,7 +31,6 @@ team modify desert friendlyFire false
 team modify mesa friendlyFire false
 team modify ice friendlyFire false
 team modify forest friendlyFire false
-
 
 team join mesa_sbd ‌‌‌‌‌
 team join cherry_sbd ‌‌‌‌
@@ -79,12 +77,15 @@ bossbar add win_timer ["",{"text":"Game Over","bold":true,"color":"dark_red"}," 
 bossbar set win_timer color red
 bossbar set win_timer visible false
 
-
 clear @a #candles
 clear @a leather_boots
 clear @a leather_leggings
-effect give @a saturation infinite 100 true
-effect give @a water_breathing infinite 100 true
+gamerule drowningDamage false
+gamerule fallDamage false
+gamerule fireDamage false
+gamerule freezeDamage false
+gamerule mobGriefing false
+gamerule doMobSpawning false
 
 # reset jail centers
 kill @e[type=marker,tag=jail.center]
