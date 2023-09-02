@@ -58,7 +58,7 @@ execute unless block ~-1 ~2 ~ #ctf:flag_ok_surroundings run return 2
 execute unless block ~-1 ~2 ~1 #ctf:flag_ok_surroundings run return 2
 
 # check if the sky is open by using a raycast
-execute store result score $flag_ray_check var run function ctf:flag/place/raycast/ray
+execute store result score $flag_ray_check var run function ctf:flag/place/raycast/main
 execute if score $flag_ray_check var matches 0 run return 3
 
 # check if the 3x3 floor contains any invalid blocks
@@ -98,7 +98,7 @@ execute if block ~1 ~-1 ~-1 #ctf:bad_floors/liquid run return 7
 execute if block ~1 ~-1 ~ #ctf:bad_floors/liquid run return 7
 execute if block ~1 ~-1 ~1 #ctf:bad_floors/liquid run return 7
 
-execute if entity @e[tag=flag, tag=!carried, distance=..25] run return 8
+execute if entity @e[type=item, tag=flag, tag=!carried, distance=..25] run return 8
 
 execute if block ~-1 ~-1 ~-1 #ctf:bad_floors/extras run return 9
 execute if block ~-1 ~-1 ~ #ctf:bad_floors/extras run return 9

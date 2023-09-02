@@ -1,3 +1,11 @@
+# forceload jails
+forceload add 196 0
+forceload add 75 117
+forceload add -125 98
+forceload add -106 -151
+forceload add 115 -186
+
+#
 kill @e[tag=jail.particle_emitter]
 kill @e[tag=flag]
 kill @e[tag=flag_mount]
@@ -11,7 +19,6 @@ tag @e remove carrying_ice
 tag @e remove carrying_forest
 
 clear @a carrot_on_a_stick
-title @a times 1s 3s 1s
 
 team add desert_sbd
 team add mesa_sbd
@@ -24,7 +31,6 @@ team modify desert friendlyFire false
 team modify mesa friendlyFire false
 team modify ice friendlyFire false
 team modify forest friendlyFire false
-
 
 team join mesa_sbd ‌‌‌‌‌
 team join cherry_sbd ‌‌‌‌
@@ -41,7 +47,6 @@ scoreboard players set ‌ flags 0
 scoreboard objectives add var dummy
 scoreboard objectives add const dummy
 scoreboard objectives add flags dummy ""
-scoreboard objectives add pafisb dummy
 scoreboard objectives add invincibility_display dummy
 scoreboard objectives add valid_tag dummy
 scoreboard objectives add captured dummy
@@ -56,6 +61,10 @@ scoreboard objectives add carrot_click used:carrot_on_a_stick
 scoreboard objectives add fungus_click used:warped_fungus_on_a_stick
 scoreboard objectives add leave_game minecraft.custom:minecraft.leave_game
 
+scoreboard players set 2 const 2
+scoreboard players set 20 const 20
+scoreboard players set 200 const 200
+
 scoreboard players set @a has_flag_placer 0
 scoreboard players set @a carrot_click 0
 scoreboard players set @a tag_cooldown 0
@@ -64,20 +73,29 @@ scoreboard players set @a place_timer 0
 scoreboard players set $game_over var 0
 scoreboard players set $started_win_countdown var 0
 scoreboard players set $tp_timer var 0
-bossbar add win_timer [{"text":"Game Over ","bold":true,"color":"red"},{"text":"in:","color":"white","bold":false}]
+bossbar add win_timer ["",{"text":"Game Over","bold":true,"color":"dark_red"}," in:"]
 bossbar set win_timer color red
 bossbar set win_timer visible false
-
 
 clear @a #candles
 clear @a leather_boots
 clear @a leather_leggings
-effect give @a saturation infinite 100 true
-effect give @a water_breathing infinite 100 true
+gamerule drowningDamage false
+gamerule fallDamage false
+gamerule fireDamage false
+gamerule freezeDamage false
+gamerule mobGriefing false
+gamerule doMobSpawning false
 
-
-execute as @e[tag=jail.center] at @s run function ctf:jail/summon_assets
-scoreboard players set $jail.particle_emitter.timer var 0
+# reset jail centers
+kill @e[type=marker,tag=jail.center]
+kill @e[type=item_display,tag=jail.forcefield]
+summon item_display -105.0 31.0 -150.0 {Tags: ["mesa", "jail.forcefield"], item: {id: "minecraft:white_stained_glass", Count: 1b, tag: {CustomModelData: 1}}, transformation: {left_rotation: [0f, 0f, 0f, 1f], translation: [0f, 0f, 0f], right_rotation: [0f, 0f, 0f, 1f], scale: [8f, 8f, 8f]}, Passengers: [{id: "minecraft:marker", Tags: ["mesa", "jail.center"]}]}
+summon item_display 116.0 33.0 -185.0 {Tags: ["cherry", "jail.forcefield"], item: {id: "minecraft:white_stained_glass", Count: 1b, tag: {CustomModelData: 2}}, transformation: {left_rotation: [0f, 0f, 0f, 1f], translation: [0f, 0f, 0f], right_rotation: [0f, 0f, 0f, 1f], scale: [8f, 8f, 8f]}, Passengers: [{id: "minecraft:marker", Tags: ["cherry", "jail.center"]}]}
+summon item_display 197.0 35.0 1.0 {Tags: ["desert", "jail.forcefield"], item: {id: "minecraft:white_stained_glass", Count: 1b, tag: {CustomModelData: 3}}, transformation: {left_rotation: [0f, 0f, 0f, 1f], translation: [0f, 0f, 0f], right_rotation: [0f, 0f, 0f, 1f], scale: [8f, 8f, 8f]}, Passengers: [{id: "minecraft:marker", Tags: ["desert", "jail.center"]}]}
+summon item_display 76.0 32.0 118.0 {Tags: ["ice", "jail.forcefield"], item: {id: "minecraft:white_stained_glass", Count: 1b, tag: {CustomModelData: 4}}, transformation: {left_rotation: [0f, 0f, 0f, 1f], translation: [0f, 0f, 0f], right_rotation: [0f, 0f, 0f, 1f], scale: [8f, 8f, 8f]}, Passengers: [{id: "minecraft:marker", Tags: ["ice", "jail.center"]}]}
+summon item_display -124.0 29.0 99.0 {Tags: ["forest", "jail.forcefield"], item: {id: "minecraft:white_stained_glass", Count: 1b, tag: {CustomModelData: 5}}, transformation: {left_rotation: [0f, 0f, 0f, 1f], translation: [0f, 0f, 0f], right_rotation: [0f, 0f, 0f, 1f], scale: [8f, 8f, 8f]}, Passengers:[{id: "minecraft:marker", Tags:["forest", "jail.center"]}]}
+execute as @e[type=marker,tag=jail.center] at @s run function ctf:jail/jailbreak/jailbreak_end
 
 scoreboard players set $jail.break.mesa.timer var 0
 scoreboard players set $jail.break.cherry.timer var 0

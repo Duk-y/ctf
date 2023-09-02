@@ -1,18 +1,14 @@
+# MANAGE PLAYERS LEAVING/JOINING
+execute as @a unless score @s leave_game matches 0 run function ctf:on_player_join
+
 # LOBBY STUFF
 execute if score $in_lobby var matches 1 run function ctf:in_lobby
-execute as @a if score @s fungus_click matches 1.. run scoreboard players set $start_game var 200
+execute if entity @a[scores={fungus_click=1..},limit=1] run scoreboard players set $start_game var 200
 scoreboard players set @a fungus_click 0
 execute if score $start_game var matches 1.. run function ctf:begin_game_timer
+
 # JAIL STUFF
-
-execute as @e[tag=jail.particle_emitter] at @s run function ctf:jail/particleconditions
-scoreboard players add $jail.particle_emitter.timer var 1
-
-execute as @a[scores={tag_cooldown=1..}] run scoreboard players remove @s tag_cooldown 1
-
-execute as @a[scores={invincibility=1..}] run tag @s add invincible
-execute as @a[tag=invincible] at @s run function ctf:invincible
-execute as @a[scores={invincibility=0}] run tag @s remove invincible 
+scoreboard players remove @a[scores={tag_cooldown=1..}] tag_cooldown 1
 
 # cooldown.x measures the time between jailbreaks to ensure that two jailbreaks can't happen sequentially (1 minute; 1200 ticks)
 # (i.e., someone just camps near the jail and jailbreaks it instantly)
@@ -43,50 +39,31 @@ execute if score $jail.break.desert.timer var matches 1 as @e[tag=jail.center, t
 execute if score $jail.break.ice.timer var matches 1 as @e[tag=jail.center, tag=ice] at @s run function ctf:jail/jailbreak/jailbreak_end
 execute if score $jail.break.forest.timer var matches 1 as @e[tag=jail.center, tag=forest] at @s run function ctf:jail/jailbreak/jailbreak_end
 
-execute if score $jail.particle_emitter.timer var matches 4 run scoreboard players set $jail.particle_emitter.timer var 0
+execute as @a[tag=invincible] at @s run function ctf:invincibility/tick_invincible_player
 
-scoreboard players set @a valid_tag 0
-tag @a remove victim
-tag @a remove tagged
-
-execute as @a[tag=!in_jail] at @s if block ~ -64 ~ #wool run tag @s add jail_verify
-execute as @a[tag=jail_verify, predicate=ctf:in_own_biome] at @s if block ~ -64 ~ #wool if entity @e[tag=jail.center, distance=..9] run function ctf:jail/in_own_jail
-execute as @e[tag=jail_verify] run tag @s add in_jail
-tag @e remove jail_verify
-execute as @a[tag=in_jail] at @s unless block ~ -64 ~ #wool run tag @s remove in_jail
+tag @a[tag=in_jail] add return_to_jail
+tag @a remove in_jail
+execute at @e[type=marker, tag=jail.center, tag=!jailbroken, limit=5] positioned ~-4 ~ ~-4 as @a[tag=player, gamemode=!spectator, gamemode=!creative, dx=7, dy=3, dz=7] positioned ~4 ~ ~4 run function ctf:jail/jail_verify
+execute as @a[tag=return_to_jail] at @s run function ctf:jail/prevent_jail_cheesing
 
 # if there's a player close to the jail, run some jailbreak conditions to check if it's a valid jailbreak
-execute as @e[tag=jail.center, tag=mesa, tag=!jailbroken] at @s as @a[team=!mesa, distance=..10, tag=!in_jail, tag=player, gamemode=!spectator, gamemode=!creative] run function ctf:jail/jailbreak_conditions/mesa
-execute as @e[tag=jail.center, tag=cherry, tag=!jailbroken] at @s as @a[team=!cherry, distance=..10, tag=!in_jail, tag=player, gamemode=!spectator, gamemode=!creative] run function ctf:jail/jailbreak_conditions/cherry
-execute as @e[tag=jail.center, tag=desert, tag=!jailbroken] at @s as @a[team=!desert, distance=..10, tag=!in_jail, tag=player, gamemode=!spectator, gamemode=!creative] run function ctf:jail/jailbreak_conditions/desert
-execute as @e[tag=jail.center, tag=ice, tag=!jailbroken] at @s as @a[team=!ice, distance=..10, tag=!in_jail, tag=player, gamemode=!spectator, gamemode=!creative] run function ctf:jail/jailbreak_conditions/ice
-execute as @e[tag=jail.center, tag=forest, tag=!jailbroken] at @s as @a[team=!forest, distance=..10, tag=!in_jail, tag=player, gamemode=!spectator, gamemode=!creative] run function ctf:jail/jailbreak_conditions/forest
+execute as @e[tag=jail.center, tag=!jailbroken] at @s run function ctf:jail/tick_jail_center_non_jailbroken
 
 # FLAGS STUFF
 
-# player carrying flag leaves the game
-execute as @e[type=armor_stand, tag=flag_mount] positioned as @s unless entity @p[tag=carrying,distance=0..5] run function ctf:flag/place/leave_game
-execute as @a[scores={leave_game=1..},tag=carrying] run function ctf:flag/remove_carrying_tags
+# prevent cross-biome flag pickup
+execute as @e[type=item,tag=flag, tag=!game_start_flag] at @s run function ctf:flag/tick_flag_entity
 
-execute as @a[tag=!carrying, tag=player] if score @s picked_up.mesa matches 1.. at @s run function ctf:flag/collect_flag
-execute as @a[tag=!carrying, tag=player] if score @s picked_up.cherry matches 1.. at @s run function ctf:flag/collect_flag
-execute as @a[tag=!carrying, tag=player] if score @s picked_up.desert matches 1.. at @s run function ctf:flag/collect_flag
-execute as @a[tag=!carrying, tag=player] if score @s picked_up.ice matches 1.. at @s run function ctf:flag/collect_flag
-execute as @a[tag=!carrying, tag=player] if score @s picked_up.forest matches 1.. at @s run function ctf:flag/collect_flag
+# detect flag pickup
+execute as @a[scores={picked_up.mesa=1..}, tag=!carrying, tag=player] at @s run function ctf:flag/collect_flag
+execute as @a[scores={picked_up.cherry=1..}, tag=!carrying, tag=player] at @s run function ctf:flag/collect_flag
+execute as @a[scores={picked_up.desert=1..}, tag=!carrying, tag=player] at @s run function ctf:flag/collect_flag
+execute as @a[scores={picked_up.ice=1..}, tag=!carrying, tag=player] at @s run function ctf:flag/collect_flag
+execute as @a[scores={picked_up.forest=1..}, tag=!carrying, tag=player] at @s run function ctf:flag/collect_flag
 
-execute as @a[tag=carrying] at @s[predicate=!ctf:in_own_biome] run function ctf:flag/stealing_flag
-execute as @a[tag=carrying] at @s[predicate=ctf:in_own_biome] run function ctf:flag/stolen_flag
-
-execute as @e[tag=flag] at @s as @a[distance=..2.5, tag=!carrying] at @s run execute store result score @s pafisb run function ctf:flag/pafisb
-# ensure that players can't pick up flags if they already have a flag and/or are in their home turf and/or are not in the same biome as the flag (to prevent picking up one's own flag over a border and causing issues)
-# (the old command) execute as @e[tag=flag] at @s if entity @a[distance=..1.4, tag=!carrying, predicate=!ctf:in_own_biome, scores={pafisb=1}] run data modify entity @s Owner set from entity @a[distance=..1.4, tag=!carrying, sort=nearest, limit=1] UUID
-execute as @e[tag=flag] at @s if entity @a[distance=..1.4, tag=!carrying, predicate=!ctf:in_own_biome, scores={pafisb=1}] run data modify entity @s Owner set from entity @a[distance=..1.4, tag=!carrying, predicate=!ctf:in_own_biome, sort=nearest, limit=1] UUID
-
-execute as @a[tag=carrying] unless score @s captured matches 1 if entity @s[predicate=ctf:in_own_biome] run function ctf:flag/capture
-
-execute as @a if score @s[tag=carrying, predicate=ctf:in_own_biome] carrot_click matches 1.. at @s run function ctf:flag/place/place_current
-execute as @a[tag=carrying, predicate=ctf:in_own_biome] unless score @s has_flag_placer matches 1 run function ctf:flag/give_placer_item
-execute as @a[tag=carrying, predicate=!ctf:in_own_biome] if score @s has_flag_placer matches 1 run function ctf:flag/remove_placer_item
+#
+execute as @a[tag=carrying] at @s run function ctf:flag/tick_carrying_player
+execute as @e[type=armor_stand, tag=flag_mount] at @s run function ctf:flag/flag_mount/tick_flag_mount
 
 # flag timer (time to place down flag upon capturing)
 execute as @a[scores={place_timer=1..}] run function ctf:flag/place/timer
@@ -103,9 +80,9 @@ execute if score $tp_timer var matches 1 positioned -87 105 -288 run playsound e
 execute if score $started_win_countdown var matches 1 run function ctf:win/countdown
 # if all of the teams have less than 3 flags at any point, cancel the countdown
 # in theory this could cause an issue if one team has 3 flags and another team has 2 flags, and one from the team with 3 is teleported to the team with 2, then there would never not be a momennt where a team does not have 3 flags. However, since the teleportation of flags is impossible, and flags are always moved manually through a process that stops the team "having" the flag for a time, this isn't an issue
-execute if score $started_win_countdown var matches 1 if score $flags_capt.mesa var < $flags_to_win const if score $flags_capt.mesa var < $flags_to_win const if score $flags_capt.cherry var < $flags_to_win const if score $flags_capt.desert var < $flags_to_win const if score $flags_capt.ice var < $flags_to_win const if score $flags_capt.forest var < $flags_to_win const run function ctf:win/cancel_countdown
+execute if score $started_win_countdown var matches 1 if score $flags_capt.mesa var < $flags_to_win const if score $flags_capt.cherry var < $flags_to_win const if score $flags_capt.desert var < $flags_to_win const if score $flags_capt.ice var < $flags_to_win const if score $flags_capt.forest var < $flags_to_win const run function ctf:win/cancel_countdown
 
-execute as @e[type=item, nbt={Item:{id:"minecraft:carrot_on_a_stick"}}] run data modify entity @s PickupDelay set value 0
-tag @e remove self_flagplace
+scoreboard players reset @a[scores={carrot_click=1..}] carrot_click
+kill @e[type=item, nbt={Item:{id:"minecraft:carrot_on_a_stick"}}]
 
 execute if score $game_started_timer var matches 1.. run scoreboard players remove $game_started_timer var 1

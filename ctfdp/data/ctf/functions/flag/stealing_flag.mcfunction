@@ -1,5 +1,4 @@
 # runs as and at any player currently carrying a flag whilst NOT in their own biome
-tp @e[tag=flag_mount, sort=nearest, limit=1] ~ ~2 ~
 effect give @s glowing 1 0 true
 title @s actionbar [{"text":"Bring the flag back to ","color":"#B1FF89"},{"text":"safety","color":"green"},{"text":" without being tagged!","color":"#B1FF89"}]
 particle happy_villager ~ ~1 ~ 0.5 0.5 0.5 1 1 force
